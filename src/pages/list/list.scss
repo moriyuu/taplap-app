@@ -1,0 +1,19 @@
+page-list {
+  h3 {
+
+  }
+
+  ion-note {
+    font-size: 15px;
+    align-self: flex-start;
+    margin-top: 14px;
+    z-index: 100;
+
+  }
+  .note-ios {
+    background: red;
+    color: white;
+    border-radius: 7px;
+    padding: 1.6px;
+  }
+}

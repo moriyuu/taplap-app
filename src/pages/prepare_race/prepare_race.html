@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>準備</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="ready()">
+        OK
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>タイトル</ion-label>
+      <ion-input type="text" [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>距離*</ion-label>
+      <ion-select [(ngModel)]="distance">
+        <ion-option value=200>200m</ion-option>
+        <ion-option value=400 selected>400m</ion-option>
+        <ion-option value=800>800m</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>第１泳者</ion-label>
+      <ion-input type="text" placeholder="選手１" [(ngModel)]="playerNames[0]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>第２泳者</ion-label>
+      <ion-input type="text" placeholder="選手２" [(ngModel)]="playerNames[1]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>第３泳者</ion-label>
+      <ion-input type="text" placeholder="選手３" [(ngModel)]="playerNames[2]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>第４泳者</ion-label>
+      <ion-input type="text" placeholder="選手４" [(ngModel)]="playerNames[3]"></ion-input>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

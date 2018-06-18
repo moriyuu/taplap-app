@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle *ngIf="timerOn===0 && unreseted===0">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <button ion-button menuToggle *ngIf="timerOn===1 || unreseted===1" disabled>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{time}}</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="timerOn===0 && unreseted===0" (click)="goPreparePage()">準備</button>
+      <button ion-button *ngIf="timerOn===1 || unreseted===1" disabled>準備</button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <div class="row header">
+    <span class="col">{{distance}}×{{times}} -{{circle_text}}</span>
+    <span class="col" *ngFor="let player of players">{{player.name}}</span>
+  </div>
+</ion-header>
+
+<ion-content>
+                <!-- 50m 未完成 -->
+              <div *ngIf="distance===50">
+                <div class="row data split" *ngFor="let t of timesArray">
+                  <span class="col lefter">{{t}}</span>
+                  <span class="col split50" *ngFor="let player of players">{{player.split50[t]}}</span>
+                </div>
+              </div>
+
+                <!-- 100m -->
+            <div *ngIf="distance===100">
+              <div *ngFor="let t of timesArray">
+                <div class="row data split">
+                  <span class="col lefter">{{t}}</span>
+                  <span class="col split50" *ngFor="let player of players; let i = index">
+                    <span *ngIf="next.player===i && next.times===t && next.split===50" class="next">{{timer_value_text}}</span>
+                    <span *ngIf="next.player!==i || next.times!==t || next.split!==50">{{player.split50[t]}}</span>
+                  </span>
+                </div>
+                <div class="row data lap">
+                  <span class="col lefter"></span>
+                  <span class="col lap100" *ngFor="let player of players">
+                    <span class="opening-brackets">（</span>{{player.lap100[t]}}<span class="closing-brackets">）</span>
+                  </span>
+                </div>
+                <div class="row data split">
+                  <span class="col lefter"></span>
+                  <div class="col split100" *ngFor="let player of players; let i = index">
+                    <span *ngIf="next.player===i && next.times===t && next.split===100" class="next">{{timer_value_text}}</span>
+                    <span *ngIf="next.player!==i || next.times!==t || next.split!==100">{{player.split100[t]}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                <!-- 200m 未完成 -->
+            <div *ngIf="distance===200">
+              <div *ngFor="let t of timesArray">
+                <div class="row data split">
+                  <span class="col lefter">{{t}}</span>
+                  <span class="col split50" *ngFor="let player of players">{{player.split50[t]}}</span>
+                </div>
+                <div class="row data lap">
+                  <span class="col lefter"></span>
+                  <span class="col lap100" *ngFor="let player of players">
+                    <span class="opening-brackets">（</span>{{player.lap100[t]}}<span class="closing-brackets">）</span>
+                  </span>
+                </div>
+                <div class="row data split">
+                  <span class="col lefter"></span>
+                  <span class="col split100" *ngFor="let player of players">{{player.split100[t]}}</span>
+                </div>
+                <div class="row data lap">
+                  <span class="col lefter"></span>
+                  <span class="col lap150">(50"8)</span>
+                </div>
+                <div class="row data split">
+                  <span class="col lefter"></span>
+                  <span class="col split150" *ngFor="let player of players">{{player.split150[t]}}</span>
+                </div>
+                <div class="row data lap">
+                  <span class="col lefter"></span>
+                  <span class="col lap200">(50"8)</span>
+                </div>
+                <div class="row data split">
+                  <span class="col lefter"></span>
+                  <span class="col split200" *ngFor="let player of players">{{player.split200[t]}}</span>
+                </div>
+              </div>
+            </div>
+
+  <ion-fab left bottom>
+    <button ion-fab (click)="start()" *ngIf="timerOn===0 && unreseted===0" color="primary">START</button>
+    <button ion-fab (click)="stopConfirm()" *ngIf="timerOn===1" color="danger">STOP</button>
+    <button ion-fab (click)="resetConfirm()" *ngIf="timerOn===0 && unreseted===1" color="light">RESET</button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab *ngIf="timerOn===0" disabled><ion-icon name="hand"></ion-icon></button>
+    <button ion-fab (click)="takeTheTime()" *ngIf="timerOn===1"><ion-icon name="hand"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

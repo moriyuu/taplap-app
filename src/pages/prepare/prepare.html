@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>準備</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="ready()">
+        OK
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>タイトル</ion-label>
+      <ion-input type="text" [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>距離*</ion-label>
+      <ion-select [(ngModel)]="distance">
+        <ion-option value=50>50m</ion-option>
+        <ion-option value=100 selected>100m</ion-option>
+        <ion-option value=200>200m</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>本数*</ion-label>
+      <ion-input type="number" value=10 [(ngModel)]="times"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>サークル*</ion-label>
+      <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" placeholder="02:10" max="19:59" minuteValues="0,5,10,15,20,25,30,35,40,45,50,55" [(ngModel)]="circle"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>出発間隔*</ion-label>
+      <ion-select [(ngModel)]="interval">
+        <ion-option value=5000 selected>5秒</ion-option>
+        <ion-option value=10000>10秒</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手１*</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[0]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手２</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[1]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手３</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[2]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手４</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[3]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手５</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[4]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手６</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[5]"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>選手７</ion-label>
+      <ion-input type="text" [(ngModel)]="temporaryPlayers[6]"></ion-input>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

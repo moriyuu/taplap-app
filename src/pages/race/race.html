@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle *ngIf="timerOn===0 && unreseted===0">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <button ion-button menuToggle *ngIf="timerOn===1 || unreseted===1" disabled>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{time}}</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="timerOn===0 && unreseted===0" (click)="goPreparePage()">
+        <!-- <ion-icon name="ios-paper-outline"></ion-icon> -->
+        設定
+      </button>
+      <button ion-button *ngIf="timerOn===1 || unreseted===1" disabled>
+        <!-- <ion-icon name="ios-paper-outline"></ion-icon> -->
+        設定
+      </button>
+
+      <button ion-button>
+        <ion-icon name="ios-download-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-header class="subheader">
+  <!-- <div class="row header">
+    <span class="col"></span>
+    <span class="col distance"></span>
+    <span class="col">SPLIT</span>
+    <span class="col">/50m</span>
+    <span class="col" *ngIf="distance>=400">/100m</span>
+    <span class="col" *ngIf="distance>=800">/200m</span>
+  </div> -->
+  <!-- <ul class="row header">
+    <li class="col"></li>
+    <li class="col distance"></li>
+    <li class="col">SPLIT</li>
+    <li class="col">/50m</li>
+    <li class="col" *ngIf="distance>=400">/100m</li>
+    <li class="col" *ngIf="distance>=800">/200m</li>
+  </ul> -->
+</ion-header>
+
+<ion-content>
+
+          <!-- <div *ngIf="distance===200">
+            <div *ngFor="let sd of splitDistanceArr">
+              <div class="row data">
+                <span class="col lefter name">{{players[floor(sd,50)-1].name}}</span>
+
+                <span class="col lefter distance">{{sd}}m</span>
+
+                <span class="col split next" *ngIf="next.split===sd">{{time}}</span>
+                <span class="col split" *ngIf="next.split!==sd">{{split[sd].text}}</span>
+
+                <span class="col lap 50" *ngIf="next.split===sd">{{timer_lap50_text}}</span>
+                <span class="col lap 50" *ngIf="next.split!==sd">{{players[floor(sd,50)-1].lapPer50[50].text}}</span>
+              </div>
+            </div>
+          </div> -->
+  <table *ngIf="distance===200" class="d200">
+    <!-- <div *ngFor="let sd of splitDistanceArr"> -->
+      <tr class="row theader">
+        <th class="col lefter name"></th>
+        <th class="col lefter distance"></th>
+        <th class="col split">SPLIT</th>
+        <th class="col lap">/50m</th>
+      </tr>
+      <tr class="row data" *ngFor="let sd of splitDistanceArr">
+        <td class="col lefter name">{{players[floor(sd,50)-1].name}}</td>
+
+        <td class="col lefter distance">{{sd}}m</td>
+
+        <td class="col split next" *ngIf="next.split===sd">{{time}}</td>
+        <td class="col split" *ngIf="next.split!==sd">{{split[sd].text}}</td>
+
+        <td class="col lap 50" *ngIf="next.split===sd">{{timer_lap50_text}}</td>
+        <td class="col lap 50" *ngIf="next.split!==sd">{{players[floor(sd,50)-1].lapPer50[50].text}}</td>
+      </tr>
+    <!-- </div> -->
+  </table>
+
+            <!-- <div *ngIf="distance===400">
+              <div *ngFor="let sd of splitDistanceArr">
+                <div class="row data">
+                  <span class="col lefter name" *ngIf="sd%100===50">{{players[floor(sd-50,100)].name}}</span>
+                  <span class="col lefter name" *ngIf="sd%100!==50"></span>
+
+                  <span class="col lefter distance">{{sd}}m</span>
+
+                  <span class="col split next" *ngIf="next.split===sd">{{time}}</span>
+                  <span class="col split" *ngIf="next.split!==sd">{{split[sd].text}}</span>
+
+                  <span class="col lap 50" *ngIf="next.split===sd">{{timer_lap50_text}}</span>
+                  <span class="col lap 50" *ngIf="next.split!==sd">{{players[floor(sd-50,100)].lapPer50[sd-(100*floor(sd-50,100))].text}}</span>
+
+                  <span class="col lap 100" *ngIf="next.split===sd && sd%100===0">{{timer_lap100_text}}</span>
+                  <span class="col lap 100" *ngIf="next.split!==sd && sd%100===0">{{players[floor(sd-50,100)].lapPer100[100].text}}</span>
+                  <span class="col lap 100" *ngIf="sd%100!==0"></span>
+                </div>
+              </div>
+            </div> -->
+  <table *ngIf="distance===400" class="d400">
+    <tr class="row theader">
+      <th class="col lefter name"></th>
+      <th class="col lefter distance"></th>
+      <th class="col split">SPLIT</th>
+      <th class="col lap">/50m</th>
+      <th class="col lap" *ngIf="distance>=400">/100m</th>
+      <th class="col lap" *ngIf="distance>=800">/200m</th>
+    </tr>
+    <tr class="row data" *ngFor="let sd of splitDistanceArr">
+      <td class="col lefter name" *ngIf="sd%100===50">{{players[floor(sd-50,100)].name}}</td>
+      <td class="col lefter name" *ngIf="sd%100!==50"></td>
+
+      <td class="col lefter distance">{{sd}}m</td>
+
+      <td class="col split next" *ngIf="next.split===sd">{{time}}</td>
+      <td class="col split" *ngIf="next.split!==sd">{{split[sd].text}}</td>
+
+      <td class="col lap 50" *ngIf="next.split===sd">{{timer_lap50_text}}</td>
+      <td class="col lap 50" *ngIf="next.split!==sd">{{players[floor(sd-50,100)].lapPer50[sd-(100*floor(sd-50,100))].text}}</td>
+
+      <td class="col lap 100" *ngIf="next.player===floor(sd-50,100) && sd%100===0">{{timer_lap100_text}}</td>
+      <td class="col lap 100" *ngIf="next.player!==floor(sd-50,100) && sd%100===0">{{players[floor(sd-50,100)].lapPer100[100].text}}</td>
+      <td class="col lap 100" *ngIf="sd%100!==0"></td>
+    </tr>
+  </table>
+
+
+  <table *ngIf="distance===800" class="d800">
+    <tr class="row theader">
+      <th class="col lefter name"></th>
+      <th class="col lefter distance"></th>
+      <th class="col split">SPLIT</th>
+      <th class="col lap">/50m</th>
+      <th class="col lap" *ngIf="distance>=400">/100m</th>
+      <th class="col lap" *ngIf="distance>=800">/200m</th>
+    </tr>
+    <!-- <tr *ngFor="let sd of splitDistanceArr"> -->
+      <tr class="row data" *ngFor="let sd of splitDistanceArr">
+        <td class="col lefter name" *ngIf="sd%200===50">{{players[floor(sd-50,200)].name}}</td>
+        <td class="col lefter name" *ngIf="sd%200!==50"></td>
+
+        <td class="col lefter distance">{{sd}}m</td>
+
+        <td class="col split next" *ngIf="next.split===sd">{{time}}</td>
+        <td class="col split" *ngIf="next.split!==sd">{{split[sd].text}}</td>
+
+        <td class="col lap 50" *ngIf="next.split===sd">{{timer_lap50_text}}</td>
+        <td class="col lap 50" *ngIf="next.split!==sd">{{players[floor(sd-50,200)].lapPer50[sd-(200*floor(sd-50,200))].text}}</td>
+
+        <td class="col lap 100" *ngIf="(next.player===floor(sd-50,200) && next.split<=200*next.player+200 && (50===sd%200 || sd%200===100)) && sd%100===0">{{timer_lap100_text}}</td>
+        <td class="col lap 100" *ngIf="(next.player!==floor(sd-50,200) || next.split> 200*next.player+200 || (50!==sd%200 && sd%200!==100)) && sd%100===0">{{players[floor(sd-50,200)].lapPer100[sd-(200*floor(sd-50,200))].text}}</td>
+        <td class="col lap 100" *ngIf="sd%100!==0"></td>
+
+        <td class="col lap 200" *ngIf="next.player===floor(sd-50,200) && sd%200===0">{{timer_lap200_text}}</td>
+        <td class="col lap 200" *ngIf="next.player!==floor(sd-50,200) && sd%200===0">{{players[floor(sd-50,200)].lapPer200[200].text}}</td>
+        <td class="col lap 200" *ngIf="sd%200!==0"></td>
+      </tr>
+    <!-- </tr> -->
+  </table>
+
+
+  <ion-fab left bottom>
+    <button ion-fab (click)="start()" *ngIf="timerOn===0 && unreseted===0" color="primary">START</button>
+    <button ion-fab (click)="stopConfirm()" *ngIf="timerOn===1" color="danger">STOP</button>
+    <button ion-fab (click)="resetConfirm()" *ngIf="timerOn===0 && unreseted===1" color="light">RESET</button>
+    <button ion-fab (click)="resetConfirm()" *ngIf="timerOn===0 && unreseted===1">
+      <ion-icon name="ios-download-outline"></ion-icon><br>SAVE
+    </button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab *ngIf="timerOn===0" disabled class="handButton"><ion-icon name="hand"></ion-icon></button>
+    <button ion-fab (click)="takeTheTime()" *ngIf="timerOn===1" class="handButton"><ion-icon name="hand"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>
